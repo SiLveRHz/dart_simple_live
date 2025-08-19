@@ -89,5 +89,5 @@ jobs:
             simple_live_tv_app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
             simple_live_tv_app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
         
-      #完成
+      #完成 6
       - run: echo "🍏 This job's status is ${{ job.status }}."
