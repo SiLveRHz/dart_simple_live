@@ -1,3 +1,21 @@
+Skip to content
+Navigation Menu
+xiaoyaocz
+dart_simple_live
+
+Type / to search
+Code
+Pull requests
+5
+Actions
+Security
+Insights
+app-build-action-dev
+Release Dev 1.9.1 / TV 1.3.9 #91
+Jobs
+Run details
+Workflow file for this run
+.github/workflows/publish_app_dev.yaml at 3acf501
 name: app-build-action-dev
 
 on:
@@ -33,7 +51,6 @@ jobs:
           echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> simple_live_app/android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> simple_live_app/android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> simple_live_app/android/key.properties
-
       # 设置JAVA环境
       - uses: actions/setup-java@v4
         with:
@@ -57,7 +74,6 @@ jobs:
         run: |
           cd simple_live_app
           flutter pub get
-
       # 安装appdmg npm install -g appdmg
       - name: Install appdmg
         run: npm install -g appdmg
@@ -71,7 +87,6 @@ jobs:
         run: |
           cd simple_live_app
           flutter build apk --release --split-per-abi
-
       #上传Artifacts
       - name: Upload APK to Artifacts
         uses: actions/upload-artifact@v4
@@ -81,7 +96,6 @@ jobs:
             simple_live_app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
             simple_live_app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
             simple_live_app/build/app/outputs/flutter-apk/app-x86_64-release.apk
-
       # TV APK签名设置
       - name: Download Android TV keystore
         id: android_tv_keystore
@@ -95,7 +109,6 @@ jobs:
           echo "storePassword=${{ secrets.TV_STORE_PASSWORD }}" >> simple_live_tv_app/android/key.properties
           echo "keyPassword=${{ secrets.TV_KEY_PASSWORD }}" >> simple_live_tv_app/android/key.properties
           echo "keyAlias=${{ secrets.TV_KEY_ALIAS }}" >> simple_live_tv_app/android/key.properties
-
       #打包 Android TV APK
       - name: Build TV APK
         run: |
@@ -110,13 +123,11 @@ jobs:
             simple_live_tv_app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
             simple_live_tv_app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
             simple_live_tv_app/build/app/outputs/flutter-apk/app-x86_64-release.apk
-
       #打包iOS
       - name: Build IPA
         run: |
           cd simple_live_app
           flutter build ios --release --no-codesign
-
       #创建未签名ipa
       - name: Create IPA
         run: |
@@ -126,7 +137,6 @@ jobs:
           cd build/ios/iphoneos/
           zip -q -r ios_no_sign.ipa Payload
           cd ../../..
-
       # 上传IPA至Artifacts
       - name: Upload IPA to Artifacts
         uses: actions/upload-artifact@v4
@@ -134,7 +144,6 @@ jobs:
           name: ios
           path: |
             simple_live_app/build/ios/iphoneos/ios_no_sign.ipa
-
       # 打包MAC
       - name: Build MacOS
         run: |
@@ -197,7 +206,6 @@ jobs:
           path: |
             simple_live_app/build/dist/*/*.deb
             simple_live_app/build/dist/*/*.zip
-
         #完成
       - run: echo "🍏 Linux job's status is ${{ job.status }}."
 
@@ -239,5 +247,6 @@ jobs:
           path: |
             simple_live_app/build/dist/*/*.msix
             simple_live_app/build/dist/*/*.zip
-        #完成 6
+        #完成
       - run: echo "🍏 Windows job's status is ${{ job.status }}."
+Release Dev 1.9.1 / TV 1.3.9 · xiaoyaocz/dart_simple_live@3acf501 
